@@ -1,5 +1,4 @@
 defmodule Application.Module.Macros do
-
   @moduledoc """
   This module contains all the macros privately used by the `Application.Module` module.
   Because we don't want these macros to be user-facing when users do `use Application.Module`,
@@ -28,6 +27,7 @@ defmodule Application.Module.Macros do
   - `get_application_env_module/0`: Returns the module that has been set in the environment (if any).
   """
   @spec functions() :: any()
+  # credo:disable-for-next-line
   defmacro functions() do
     quote do
       def mock_module() do
@@ -42,11 +42,24 @@ defmodule Application.Module.Macros do
         @behaviour_module
       end
 
-      def get_application_env_module() do
-        keys = Module.split(__MODULE__) |> Enum.map(&Macro.underscore/1) |> Enum.map(&String.to_atom/1)
+      defp application_env_keys do
+        Module.split(__MODULE__) |> Enum.map(&Macro.underscore/1) |> Enum.map(&String.to_atom/1)
+      end
 
+      def put_application_module(module) do
+        Application.put_env(
+          :application,
+          :modules,
+          Application.Module.NestedKeywordList.generate_nested_keyword_list(
+            application_env_keys(),
+            module
+          )
+        )
+      end
+
+      def get_application_env_module() do
         application_module =
-          case keys do
+          case application_env_keys() do
             [] -> nil
             keys -> Application.get_env(:application, :modules, %{}) |> get_in(keys)
           end
