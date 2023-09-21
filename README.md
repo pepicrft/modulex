@@ -31,7 +31,7 @@ Mox.defmock(MyApplication.Module.mock_module(), for: MyApplication.Module.behavi
 MyApplication.Module.put_application_env_module(MyApplication.Module.mock_module())
 ```
 
-> **Note:** That the naming of the modules and the key of the module under the application's configuration is conventional. 
+> **Important:** We strongly recommend the definition of the mocks and the updating of the application environment with them as part of `test_helpers.exs` or any other module that runs before tests start running in parallel. Because the application environment is a global state, updating it from tests might cause unexpected behaviours that are hard to debug.
 
 ## Installation
 
