@@ -1,4 +1,7 @@
 defmodule Application.Module.MapUtils do
+  @moduledoc """
+  A set of utilities to work with maps
+  """
   @spec put_deep(map :: map(), keys :: [atom()], value :: term()) :: map()
   def put_deep(map, [key], value), do: Map.put(map, key, value)
 

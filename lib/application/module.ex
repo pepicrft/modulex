@@ -26,7 +26,7 @@ defmodule Application.Module do
         @moduledoc """
         Contains the implementation for the module that contains this module.
         """
-        @behaviour Module.split(__MODULE__) |> List.replace_at(-1, :Behaviour) |> Module.concat
+        @behaviour Module.split(__MODULE__) |> List.replace_at(-1, :Behaviour) |> Module.concat()
 
         unquote(block)
       end

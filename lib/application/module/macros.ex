@@ -53,7 +53,7 @@ defmodule Application.Module.Macros do
       end
 
       def get_application_env_module() do
-        case Application.get_env(:application, :module, %{}) |> get_in(application_env_keys())  do
+        case Application.get_env(:application, :module, %{}) |> get_in(application_env_keys()) do
           nil -> @implementation_module
           module -> module
         end
