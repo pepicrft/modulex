@@ -46,7 +46,7 @@ defmodule Application.Module.Macros do
         Module.split(__MODULE__) |> Enum.map(&Macro.underscore/1) |> Enum.map(&String.to_atom/1)
       end
 
-      def put_application_module(module) do
+      def put_application_env_module(module) do
         Application.put_env(
           :application,
           :modules,
