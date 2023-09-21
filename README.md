@@ -41,7 +41,7 @@ by adding `application_module` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:application_module, "~> 0.3.0"}
+    {:application_module, "~> 0.4.0"}
   ]
 end
 ```
