@@ -19,7 +19,7 @@ defmodule Application.Module do
 
   defmacro defimplementation(block) do
     quote do
-      defmodule Impl do
+      defmodule Implementation do
         @behaviour Module.split(__MODULE__) |> List.replace_at(-1, :Behaviour) |> Module.concat
 
         unquote(block)
@@ -29,7 +29,7 @@ defmodule Application.Module do
 
   defmacro __before_compile__(env) do
     quote location: :keep do
-      @implementation_module __MODULE__.Impl
+      @implementation_module __MODULE__.Implementation
       @behaviour_module __MODULE__.Behaviour
       @behaviour @behaviour_module
 

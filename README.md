@@ -29,6 +29,8 @@ Mox.defmock(MyApplication.Module.Mock, for: MyApplication.Module.Behaviour)
 Application.put_env(:my_application, :modules, [module: MyApplication.Module.Mock])
 ```
 
+> **Note:** That the naming of the modules and the key of the module under the application's configuration is conventional. 
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
