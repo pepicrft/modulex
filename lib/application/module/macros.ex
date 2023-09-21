@@ -47,24 +47,13 @@ defmodule Application.Module.Macros do
       end
 
       def put_application_env_module(module) do
-        Application.put_env(
-          :application,
-          :modules,
-          Application.Module.NestedKeywordList.generate_nested_keyword_list(
-            application_env_keys(),
-            module
-          )
-        )
+        env = Application.get_env(:application, :module, %{})
+        env = env |> Application.Module.MapUtils.put_deep(application_env_keys(), module)
+        Application.put_env(:application, :module, env)
       end
 
       def get_application_env_module() do
-        application_module =
-          case application_env_keys() do
-            [] -> nil
-            keys -> Application.get_env(:application, :modules, %{}) |> get_in(keys)
-          end
-
-        case application_module do
+        case Application.get_env(:application, :module, %{}) |> get_in(application_env_keys())  do
           nil -> @implementation_module
           module -> module
         end

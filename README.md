@@ -25,8 +25,10 @@ end
 When used in companion with a mocking library like Mox, you can easily mock the module's implementation in your tests:
 
 ```elixir
-Mox.defmock(MyApplication.Module.Mock, for: MyApplication.Module.Behaviour)
-Application.put_env(:my_application, :modules, [module: MyApplication.Module.Mock])
+// test_helper.exs
+
+Mox.defmock(MyApplication.Module.mock_module(), for: MyApplication.Module.behaviour_module())
+MyApplication.Module.put_application_env_module(MyApplication.Module.mock_module())
 ```
 
 > **Note:** That the naming of the modules and the key of the module under the application's configuration is conventional. 
