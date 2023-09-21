@@ -8,6 +8,7 @@ defmodule ApplicationModule.MixProject do
       app: :application_module,
       version: @version,
       elixir: "~> 1.15",
+      description: "Generate a module whose implementation can be swapped at runtime with tools like Mox.",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       docs: docs(),
