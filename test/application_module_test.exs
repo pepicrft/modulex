@@ -16,7 +16,6 @@ defmodule ApplicationModuleTest do
   end
 
   defmodule Mock do
-
   end
 
   test "Test.test() returns test" do
@@ -40,10 +39,11 @@ defmodule ApplicationModuleTest do
   end
 
   test "Test.get_application_env_module() returns the right module when the implementation is changed" do
-    module = Application.get_env(:application, :modules, %{})[:application_module_test][:test]
-    Application.put_env(:application, :modules, [application_module_test: [test: __MODULE__.Mock]])
+    module = __MODULE__.Test.get_application_env_module()
+    __MODULE__.Test.put_application_env_module(__MODULE__.Mock)
+
     assert Test.get_application_env_module() == __MODULE__.Mock
     # Note: This prevents asynchronous tests from working.
-    Application.put_env(:application, :modules, [application_module_test: [test: module]])
+    __MODULE__.Test.put_application_env_module(module)
   end
 end
