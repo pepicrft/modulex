@@ -1,21 +1,7 @@
 defmodule Application.Module.Macros do
-  defmacro ensure_behaviour_presence!() do
-    quote do
-      if !Code.ensure_loaded?(@behaviour_module) do
-        raise "The module #{inspect(@behaviour_module)} is absent."
-      end
-
-      if !function_exported?(@behaviour_module, :behaviour_info, 1) do
-        raise "The module #{inspect(@behaviour_module)} is not a behaviour. Ensure it includes callbacks."
-      end
-    end
-  end
-
-  defmacro ensure_implementation_presence!() do
-    quote do
-      if !Code.ensure_loaded?(@implementation_module) do
-        raise "The module #{inspect(@implementation_module)} is absent."
-      end
+  def ensure_module_loaded!(module) do
+    unless Code.ensure_loaded?(module) do
+      raise "The module #{inspect(module)} is absent."
     end
   end
 

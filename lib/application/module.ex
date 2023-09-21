@@ -34,8 +34,8 @@ defmodule Application.Module do
       @behaviour @behaviour_module
 
       unquote(__MODULE__).Macros.application_env_module_function()
-      unquote(__MODULE__).Macros.ensure_behaviour_presence!()
-      unquote(__MODULE__).Macros.ensure_implementation_presence!()
+      unquote(__MODULE__).Macros.ensure_module_loaded!(@behaviour_module)
+      unquote(__MODULE__).Macros.ensure_module_loaded!(@implementation_module)
       unquote(__MODULE__).Macros.define_behaviour_functions(unquote(env))
     end
   end
