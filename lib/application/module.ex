@@ -9,7 +9,7 @@ defmodule Application.Module do
     end
   end
 
-  defmacro defbehaviour(block) do
+  defmacro defbehaviour(do: block) do
     quote do
       defmodule Behaviour do
         unquote(block)
@@ -17,7 +17,7 @@ defmodule Application.Module do
     end
   end
 
-  defmacro defimplementation(block) do
+  defmacro defimplementation(do: block) do
     quote do
       defmodule Implementation do
         @behaviour Module.split(__MODULE__) |> List.replace_at(-1, :Behaviour) |> Module.concat
@@ -31,7 +31,20 @@ defmodule Application.Module do
     quote location: :keep do
       @implementation_module __MODULE__.Implementation
       @behaviour_module __MODULE__.Behaviour
+      @mock_module __MODULE__.Mock
       @behaviour @behaviour_module
+
+      def mock_module() do
+        @mock_module
+      end
+
+      def implementation_module() do
+        @implementation_module
+      end
+
+      def behaviour_module() do
+        @behaviour_module
+      end
 
       unquote(__MODULE__).Macros.application_env_module_function()
       unquote(__MODULE__).Macros.ensure_module_loaded!(@behaviour_module)
