@@ -34,19 +34,7 @@ defmodule Application.Module do
       @mock_module __MODULE__.Mock
       @behaviour @behaviour_module
 
-      def mock_module() do
-        @mock_module
-      end
-
-      def implementation_module() do
-        @implementation_module
-      end
-
-      def behaviour_module() do
-        @behaviour_module
-      end
-
-      unquote(__MODULE__).Macros.application_env_module_function()
+      unquote(__MODULE__).Macros.functions()
       unquote(__MODULE__).Macros.ensure_module_loaded!(@behaviour_module)
       unquote(__MODULE__).Macros.ensure_module_loaded!(@implementation_module)
       unquote(__MODULE__).Macros.define_behaviour_functions(unquote(env))

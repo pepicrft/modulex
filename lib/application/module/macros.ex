@@ -5,8 +5,20 @@ defmodule Application.Module.Macros do
     end
   end
 
-  defmacro application_env_module_function() do
+  defmacro functions() do
     quote do
+      def mock_module() do
+        @mock_module
+      end
+
+      def implementation_module() do
+        @implementation_module
+      end
+
+      def behaviour_module() do
+        @behaviour_module
+      end
+
       def get_application_env_module() do
         [_ | keys] = Module.split(__MODULE__) |> Enum.map(&String.to_atom/1)
 
