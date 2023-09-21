@@ -12,6 +12,9 @@ defmodule Application.Module do
   defmacro defbehaviour(do: block) do
     quote do
       defmodule Behaviour do
+        @moduledoc """
+        Implements the behaviour for the module that contains this behaviour.
+        """
         unquote(block)
       end
     end
@@ -20,6 +23,9 @@ defmodule Application.Module do
   defmacro defimplementation(do: block) do
     quote do
       defmodule Implementation do
+        @moduledoc """
+        Contains the implementation for the module that contains this module.
+        """
         @behaviour Module.split(__MODULE__) |> List.replace_at(-1, :Behaviour) |> Module.concat
 
         unquote(block)

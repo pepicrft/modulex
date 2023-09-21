@@ -1,10 +1,33 @@
 defmodule Application.Module.Macros do
+
+  @moduledoc """
+  This module contains all the macros privately used by the `Application.Module` module.
+  Because we don't want these macros to be user-facing when users do `use Application.Module`,
+  we extract them into a different module.
+  """
+
+  @doc """
+  This macro ensures the given module has been loaded.
+  """
+  @spec ensure_module_loaded!(module :: module()) :: any()
   def ensure_module_loaded!(module) do
     unless Code.ensure_loaded?(module) do
       raise "The module #{inspect(module)} is absent."
     end
   end
 
+  @doc """
+  This macro returns an AST containing a set of utility functions
+  that need to be incorporated into the module that uses the `Application.Module` module.
+
+  ## Functions
+
+  - `mock_module/0`: Returns the mock module.
+  - `implementation_module/0`: Returns the implementation module.
+  - `behaviour_module/0`: Returns the behaviour module.
+  - `get_application_env_module/0`: Returns the module that has been set in the environment (if any).
+  """
+  @spec functions() :: any()
   defmacro functions() do
     quote do
       def mock_module() do
@@ -20,7 +43,7 @@ defmodule Application.Module.Macros do
       end
 
       def get_application_env_module() do
-        [_ | keys] = Module.split(__MODULE__) |> Enum.map(&String.to_atom/1)
+        keys = Module.split(__MODULE__) |> Enum.map(&Macro.underscore/1) |> Enum.map(&String.to_atom/1)
 
         application_module =
           case keys do
@@ -36,6 +59,10 @@ defmodule Application.Module.Macros do
     end
   end
 
+  @doc """
+  This macro returns an AST that defines the functions that are defined in the behaviour module.
+  """
+  @spec define_behaviour_functions(env :: Macro.Env.t()) :: any()
   defmacro define_behaviour_functions(env) do
     function_definitions =
       Module.concat(env.module, :Behaviour).behaviour_info(:callbacks)
