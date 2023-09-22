@@ -1,4 +1,4 @@
-defmodule Application.Module.MapUtils do
+defmodule Modulex.MapUtils do
   @moduledoc """
   A set of utilities to work with maps
   """

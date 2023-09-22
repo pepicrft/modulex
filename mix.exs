@@ -5,7 +5,7 @@ defmodule ApplicationModule.MixProject do
 
   def project do
     [
-      app: :application_module,
+      app: :modulex,
       version: @version,
       elixir: "~> 1.15",
       description:
@@ -36,17 +36,17 @@ defmodule ApplicationModule.MixProject do
 
   defp package() do
     [
-      name: "application_module",
+      name: "modulex",
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/glossia/application_module"}
+      links: %{"GitHub" => "https://github.com/glossia/modulex"}
     ]
   end
 
   defp docs() do
     [
-      main: "application_module",
+      main: "modulex",
       extras: ["README.md"],
-      source_url: "https://github.com/glossia/application_module/",
+      source_url: "https://github.com/glossia/modulex/",
       source_ref: @version
     ]
   end

@@ -1,7 +1,7 @@
-defmodule Application.Module.Macros do
+defmodule Modulex.Macros do
   @moduledoc """
-  This module contains all the macros privately used by the `Application.Module` module.
-  Because we don't want these macros to be user-facing when users do `use Application.Module`,
+  This module contains all the macros privately used by the `Modulex` module.
+  Because we don't want these macros to be user-facing when users do `use Modulex`,
   we extract them into a different module.
   """
 
@@ -17,7 +17,7 @@ defmodule Application.Module.Macros do
 
   @doc """
   This macro returns an AST containing a set of utility functions
-  that need to be incorporated into the module that uses the `Application.Module` module.
+  that need to be incorporated into the module that uses the `Modulex` module.
 
   ## Functions
 
@@ -48,7 +48,7 @@ defmodule Application.Module.Macros do
 
       def put_application_env_module(module) do
         env = Application.get_env(:application, :module, %{})
-        env = env |> Application.Module.MapUtils.put_deep(application_env_keys(), module)
+        env = env |> Modulex.MapUtils.put_deep(application_env_keys(), module)
         Application.put_env(:application, :module, env)
       end
 
