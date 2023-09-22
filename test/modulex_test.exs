@@ -1,8 +1,8 @@
-defmodule ApplicationModuleTest do
+defmodule ModulexTest do
   use ExUnit.Case
 
   defmodule Test do
-    use Application.Module
+    use Modulex
 
     defimplementation do
       def test() do

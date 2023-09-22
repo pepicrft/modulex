@@ -1,4 +1,4 @@
-defmodule Application.Module do
+defmodule Modulex do
   @type t() :: module()
 
   defmacro __using__(_opts \\ []) do

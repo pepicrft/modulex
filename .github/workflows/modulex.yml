@@ -1,4 +1,4 @@
-name: application_module
+name: modulex
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   pull_request:
 
 concurrency:
-  group: application_module-${{ github.head_ref }}
+  group: modulex-${{ github.head_ref }}
   cancel-in-progress: true
 
 env:
