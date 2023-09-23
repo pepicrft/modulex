@@ -74,6 +74,7 @@ defmodule Modulex.Macros do
       end)
       |> Enum.map(fn {fun, args} ->
         quote do
+          @impl true
           def unquote(fun)(unquote_splicing(args)) do
             get_application_env_module().unquote(fun)(unquote_splicing(args))
           end
