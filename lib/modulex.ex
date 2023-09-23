@@ -34,7 +34,7 @@ defmodule Modulex do
   end
 
   defmacro __before_compile__(env) do
-    quote location: :keep do
+    quote do
       @implementation_module __MODULE__.Implementation
       @behaviour_module __MODULE__.Behaviour
       @mock_module __MODULE__.Mock
