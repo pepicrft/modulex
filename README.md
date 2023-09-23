@@ -41,7 +41,7 @@ by adding `modulex` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:modulex, "~> 0.5.0"}
+    {:modulex, "~> 0.6.0"}
   ]
 end
 ```
