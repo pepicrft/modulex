@@ -28,7 +28,7 @@ defmodule ApplicationModule.MixProject do
   defp deps do
     [
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:boundary, "~> 0.10", runtime: false},
+      {:boundary, "~> 0.11", runtime: false},
       {:dialyxir, "~> 1.3", only: [:dev, :test], runtime: false},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
